@@ -37,3 +37,19 @@ exports.validateSignup = function () {
       .custom((value, { req }) => value === req.body.password)
   ];
 };
+
+/**
+ * Validators for the signin route
+ *
+ * @returns {Array} An array of validations
+ */
+exports.validateSignin = function () {
+  return [
+    check('email').isEmail().withMessage('You have entered an invalid email'),
+    check('password')
+      .isLength({
+        min: 8
+      })
+      .withMessage('Password must have at least 8 characters')
+  ];
+};
