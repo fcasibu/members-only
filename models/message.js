@@ -6,6 +6,12 @@ const MessageSchema = new mongoose.Schema({
     ref: 'User',
     required: true
   },
+  title: {
+    type: String,
+    required: true,
+    minLength: 1,
+    maxLength: 50
+  },
   message: {
     type: String,
     required: true,
