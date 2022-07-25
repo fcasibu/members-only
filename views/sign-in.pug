@@ -1,22 +1,27 @@
 extends layout
 
 block content
-  div.container
-    form.signin-form(action='' method='POST')
-      label.form-control(for='email')
-        p First Name
-        input(type='email' id='email' name='email' value=(previous ? previous.email : ''))
-        if errors
-          - const error = errors.find(el => el.param === 'email')
-          if error
-            p.error-message= error.msg
-      label.form-control(for='password')
-        p Last Name
-        input(type='password' id='password' name='password' value=(previous ? previous.password : ''))
-        if errors
-          - const error = errors.find(el => el.param === 'password')
-          if error
-            p.error-message= error.msg
-     div.button-container
-        button(type='submit') Sign up
+  if currentUser 
+    p You are already logged in
+  else 
+    if authError
+      p= authError
+    div.container
+      form.signin-form(action='/auth/signin' method='POST')
+        label.form-control(for='email')
+          p Email Address
+          input(type='email' id='email' name='email' value=(previous ? previous.email : ''))
+          if errors
+            - const error = errors.find(el => el.param === 'email')
+            if error
+              p.error-message= error.msg
+        label.form-control(for='password')
+          p Password
+          input(type='password' id='password' name='password' value=(previous ? previous.password : ''))
+          if errors
+            - const error = errors.find(el => el.param === 'password')
+            if error
+              p.error-message= error.msg
+        div.button-container
+          button(type='submit') Sign in
 
