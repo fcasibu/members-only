@@ -6,19 +6,21 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const passport = require('passport');
-require('dotenv').config();
+require('dotenv').config({ path: './config.env' });
 
-mongoose.connect(process.env.MONGODB, {
-  useUnifiedTopology: true,
-  useNewUrlParser: true
-});
+mongoose
+  .connect(process.env.MONGODB, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+  })
+  .then(() => console.log('Connected to mongodb'));
 
 const db = mongoose.connection;
 
-db.on('error', console.error.bind(console, 'failed connecting to mongodb'));
+db.on('error', () => console.error('failed connecting to mongodb'));
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
 
 const app = express();
 
@@ -42,7 +44,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
