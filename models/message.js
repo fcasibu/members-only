@@ -5,6 +5,12 @@ const MessageSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true
+  },
+  message: {
+    type: String,
+    required: true,
+    minLength: 1,
+    maxLength: 1000
   }
 });
 
