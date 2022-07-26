@@ -1,13 +1,14 @@
 const express = require('express');
+
 const User = require('../models/user');
+const messageController = require('../controllers/messageController');
+
 const { catchAsync } = require('../utils/catchAsync');
+const { checkAdminRole } = require('../utils/checkAdminRole');
 
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
-  console.log(req.user);
-  res.render('index', { title: 'Express', info: req.flash('info')[0] });
-});
+router.get('/', messageController.getAllMessages);
 
 /* Get and post request for the join club route */
 router.get('/join-club', (req, res) => res.render('member'));
@@ -36,6 +37,12 @@ router.post(
     }
     return res.render('admin', { error: { message: 'Incorrect Answer' } });
   })
+);
+
+router.get(
+  '/:messageId/delete',
+  checkAdminRole,
+  messageController.deleteMessage
 );
 
 module.exports = router;
