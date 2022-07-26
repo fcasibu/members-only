@@ -14,9 +14,9 @@ exports.getAllMessages = catchAsync(async (req, res, next) => {
   res.render('index', { messages, info: req.flash('info')[0] });
 });
 
-exports.getMessage = (req, res) => res.render('new-message');
+exports.getMessageForm = (req, res) => res.render('new-message');
 
-exports.postMessage = catchAsync(async (req, res, next) => {
+exports.postMessageForm = catchAsync(async (req, res, next) => {
   await Message.create({
     user: req.user,
     title: req.body.title,

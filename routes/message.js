@@ -7,13 +7,13 @@ const { validateMessage } = require('../utils/validators');
 
 const router = express.Router();
 
-router.get('/', messageController.getMessage);
+router.get('/', messageController.getMessageForm);
 
 router.post(
   '/',
   validateMessage(),
   isValid('new-message'),
-  messageController.postMessage
+  messageController.postMessageForm
 );
 
 module.exports = router;
