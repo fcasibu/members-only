@@ -6,9 +6,9 @@ exports.getAllMessages = catchAsync(async (req, res, next) => {
   const skip = paginate(req.query.page || 1);
   const messages = await Message.find()
     .populate({ path: 'user', select: '-password -email' })
-    .sort({ createdAt: -1 })
     .skip(skip)
     .limit(10)
+    .sort('-createdAt')
     .exec();
 
   res.render('index', { messages, info: req.flash('info')[0] });
