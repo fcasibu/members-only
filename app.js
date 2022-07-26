@@ -8,10 +8,9 @@ const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const flash = require('connect-flash');
-require('dotenv').config({ path: './config.env' });
+require('dotenv').config();
 
 mongoose
-  // MONGODB=<uri>
   .connect(process.env.MONGODB, {
     useUnifiedTopology: true,
     useNewUrlParser: true
@@ -51,7 +50,6 @@ passport.use(
 
 app.use(
   session({
-    // SECRET_KEY=<key>
     secret: process.env.SECRET_KEY,
     resave: false,
     saveUninitialized: true
