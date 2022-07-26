@@ -70,7 +70,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 passport.serializeUser((user, done) => done(null, user.id));
 
 passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
+  User.findById(id, '_id role', (err, user) => {
     done(err, user);
   });
 });
