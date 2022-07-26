@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  if !currentUser 
+      h1 Sign in to gain access to this page
+  else
+    if currentUser.role == 'admin'       
+      p You are already an admin
+    else
+      if error
+        p= error.message
+      div.container
+        form.message-form(action='' method='POST')
+          label.form-control(for='answer')
+            p Answer
+            input(type='text' id='answer' name='answer')
+          div.button-container
+          button(type='submit') Submit
+
