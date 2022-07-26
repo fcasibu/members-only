@@ -4,8 +4,10 @@ header.header
   nav.primary: ul.primary__links
     if currentUser
       li.primary__link: a(href='/new-message') Create a new message   
-      li.primary__link: a(href='/join-club') Join the club
-      li.primary__link: a(href='/admin') Become an admin   
+      if currentUser.role != 'member' && currentUser.role != 'admin'
+        li.primary__link: a(href='/join-club') Join the club
+      if currentUser.role != 'admin'
+        li.primary__link: a(href='/admin') Become an admin   
       li.primary__link: a(href='/auth/signout') Sign out   
     else
       li.primary__link: a(href='/auth/signup') Sign Up   
