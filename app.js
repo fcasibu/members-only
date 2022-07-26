@@ -11,6 +11,7 @@ const flash = require('connect-flash');
 require('dotenv').config({ path: './config.env' });
 
 mongoose
+  // MONGODB=<uri>
   .connect(process.env.MONGODB, {
     useUnifiedTopology: true,
     useNewUrlParser: true
@@ -21,10 +22,12 @@ const db = mongoose.connection;
 
 db.on('error', () => console.error('failed connecting to mongodb'));
 
+const User = require('./models/user');
+const { catchAsync } = require('./utils/catchAsync');
+
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
-const User = require('./models/user');
-const catchAsync = require('./utils/catchAsync');
+const messageRouter = require('./routes/message');
 
 const app = express();
 
@@ -48,6 +51,7 @@ passport.use(
 
 app.use(
   session({
+    // SECRET_KEY=<key>
     secret: process.env.SECRET_KEY,
     resave: false,
     saveUninitialized: true
@@ -78,6 +82,7 @@ app.use((req, res, next) => {
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
+app.use('/new-message', messageRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
