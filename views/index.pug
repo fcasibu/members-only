@@ -1,7 +1,33 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
   if info
     p.info-box= info
+  div.messages
+    each message in messages
+      div.message
+        if currentUser && currentUser.role === 'admin'
+          div.message__delete
+            a(href=`${message._id}/delete`) Delete
+        div.message__left
+          div.image-container
+            img(src=message.user.photoURL)
+          div.role
+            span= message.user.role
+        div.message__right
+          div.message__header
+            h3= message.title
+            p= message.message
+          div.message__footer
+            div.message__author
+              p Posted by 
+                if currentUser && currentUser.role !== 'guest'
+                  strong #{message.user.firstName} #{message.user.lastName}
+                else
+                  strong Unknown
+              span= message.relativeTime
+            div.message__date
+              p= message.formattedDate
+
+
+
