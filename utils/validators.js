@@ -53,3 +53,21 @@ exports.validateSignin = function () {
       .withMessage('Password must have at least 8 characters')
   ];
 };
+
+/**
+ * Validators for the new-message route
+ *
+ * @returns {Array} An array of validations
+ */
+exports.validateMessage = function () {
+  return [
+    check('title')
+      .isLength({ min: 1, max: 50 })
+      .withMessage('Title must have a min and max length of 1-50 characters'),
+    check('message')
+      .isLength({ min: 1, max: 1000 })
+      .withMessage(
+        'Message must have a min and max length of 1-1000 characters'
+      )
+  ];
+};
