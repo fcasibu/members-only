@@ -1,5 +1,5 @@
-const express = require('express');
 const passport = require('passport');
+const express = require('express');
 
 const authController = require('../controllers/authController');
 const { isValid } = require('../middlewares/isValid');
@@ -13,10 +13,13 @@ router.post(
   validateSignin(),
   isValid('sign-in'),
   passport.authenticate('local', {
-    successRedirect: '/',
     failureRedirect: '/auth/signin',
     failureFlash: true
-  })
+  }),
+  (req, res) => {
+    req.flash('info', 'Sign in successful');
+    res.redirect('/');
+  }
 );
 
 router.get('/signup', authController.getSignUp);
@@ -26,5 +29,7 @@ router.post(
   isValid('sign-up'),
   authController.postSignup
 );
+
+router.get('/signout', authController.getSignOut);
 
 module.exports = router;
