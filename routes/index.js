@@ -1,6 +1,7 @@
 const express = require('express');
 
 const User = require('../models/user');
+
 const messageController = require('../controllers/messageController');
 
 const { catchAsync } = require('../utils/catchAsync');
