@@ -1,0 +1,12 @@
+header.header
+  div.header__logo
+    p Members Only
+  nav.primary: ul.primary__links
+    if currentUser
+      li.primary__link: a(href='/new-message') Create a new message   
+      li.primary__link: a(href='/join-club') Join the club
+      li.primary__link: a(href='/admin') Become an admin   
+      li.primary__link: a(href='/auth/signout') Sign out   
+    else
+      li.primary__link: a(href='/auth/signup') Sign Up   
+      li.primary__link: a(href='/auth/signin') Sign In
