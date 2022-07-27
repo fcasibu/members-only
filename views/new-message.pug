@@ -4,22 +4,21 @@ block content
   if !currentUser 
     h1 Sign in to gain access to this page
   else
-    div.container
-      form.message-form(action='' method='POST')
-        label.form-control(for='title')
-          p Title
-          input(type='text' id='title' name='title' value=(previous ? previous.title : ''))
-          if errors
-            - const error = errors.find(el => el.param === 'title')
-            if error
-              p.error-message= error.msg
-        label.form-control(for='message')
-          p Message
-          textarea(id='message' name='message')= previous ? previous.message : ''
-          if errors
-            - const error = errors.find(el => el.param === 'message')
-            if error
-              p.error-message= error.msg
-        div.button-container
-          button(type='submit') Submit
+    form.message-form(action='' method='POST')
+      label.form-control(for='title')
+        p Title
+        input(type='text' id='title' name='title' value=(previous ? previous.title : ''))
+        if errors
+          - const error = errors.find(el => el.param === 'title')
+          if error
+            p.error-message= error.msg
+      label.form-control(for='message')
+        p Message
+        textarea(id='message' name='message')= previous ? previous.message : ''
+        if errors
+          - const error = errors.find(el => el.param === 'message')
+          if error
+            p.error-message= error.msg
+      div.button-container
+        button(type='submit') Submit
 

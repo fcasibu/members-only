@@ -9,11 +9,10 @@ block content
     else
       if error
         p= error.message
-      div.container
-        form.message-form(action='' method='POST')
-          label.form-control(for='answer')
-            p Answer
-            input(type='text' id='answer' name='answer')
-          div.button-container
-          button(type='submit') Submit
+      form.message-form(action='' method='POST')
+        label.form-control(for='answer')
+          p Answer
+          input(type='text' id='answer' name='answer')
+        div.button-container
+        button(type='submit') Submit
 

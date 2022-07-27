@@ -19,37 +19,33 @@ block content
     each message in messages
       div.message
         if currentUser && currentUser.role === 'admin'
-          div.message__delete
-            a(href=`${message._id}/delete`) Delete
-        div.message__left
-          div.role
-            span= message.user.role
-        div.message__right
-          div.message__header
-            h3= message.title
-            p= message.message
-          div.message__footer
-            div.message__author
-              p Posted by 
-                if currentUser && currentUser.role !== 'guest'
-                  strong #{message.user.firstName} #{message.user.lastName}
-                else
-                  strong Unknown
-              span= message.relativeTime
-            div.message__date
-              p= message.formattedDate
-  div.page-controls
-    div.left-arrow
-      if page > 1
-        a(href=`?page=${page - 1}`) &larr;
-    div.current-page
-      if page > 1
-        p= page
-      else
-        p 1
-    div.right-arrow
-      unless messages.length < 10
-        a(href=`?page=${page + 1}`) &rarr;
-
-
-
+          a(href=`${message._id}/delete`).message__delete Delete
+        div.message__header
+          h3= message.title
+          p= message.message
+        div.message__footer
+          div.message__author
+            p Posted #{message.relativeTime} by  
+              if currentUser && currentUser.role !== 'guest'
+                strong #{message.user.firstName} #{message.user.lastName}
+              else
+                strong Unknown
+            div(data-role=message.user.role).role
+              span= message.user.role
+          div.message__date
+            p= message.formattedDate
+    else
+      h1 No Content
+  if messages.length !== 0
+    div.page-controls
+      div.left-arrow
+        if page > 1
+          a(href=`?page=${page - 1}`) &larr;
+      div.current-page
+        if page > 1
+          p= page
+        else
+          p 1
+      div.right-arrow
+        unless messages.length < 10
+          a(href=`?page=${page + 1}`) &rarr;
