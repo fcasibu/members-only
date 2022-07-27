@@ -10,6 +10,7 @@
 
 html {
   font-size: 62.5%;
+  background-color: #f5f7fb;
 }
 
 a {
@@ -24,14 +25,14 @@ li {
 body {
   font-size: 1.6rem;
   font-family: 'Inter', sans-serif;
-  background-color: #f5f7fb;
   color: #333;
-  height: 100vh;
+  height: 100%;
 }
 
 .container {
   max-width: 900px;
   margin: 0 auto;
+  padding: 0 1rem;
 }
 
 /* Header */
@@ -43,7 +44,9 @@ body {
 }
 
 .header__logo a {
-  font-size: 3rem;
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 nav .primary__links {
@@ -60,7 +63,7 @@ nav .primary__links {
   align-items: center;
   background-color: #f5f5f5;
   border-radius: 3px;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
   width: max-content;
   height: 65px;
   padding: 1rem 3rem;
@@ -186,14 +189,14 @@ nav .primary__links {
 .message__header h3 {
   font-size: 4rem;
   text-transform: uppercase;
-  max-width: 30ch;
+  max-width: 90%;
   word-break: break-all;
 }
 
 .message__header p {
   color: #555;
   font-size: 2rem;
-  max-width: 65ch;
+  line-height: 1.8;
   white-space: pre-wrap;
   word-break: break-all;
 }
@@ -208,6 +211,11 @@ nav .primary__links {
   display: flex;
   align-items: center;
   gap: 1rem;
+  width: max-content;
+}
+
+.message__author p strong {
+  text-transform: capitalize;
 }
 
 .message__author .role {
@@ -217,6 +225,7 @@ nav .primary__links {
   font-size: 1.2rem;
   font-weight: bold;
   padding: 0.4rem 0.5rem;
+  margin-left: 1rem;
   pointer-events: none;
 }
 
@@ -234,10 +243,65 @@ nav .primary__links {
 }
 
 /* Forms */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+form button {
+  align-self: flex-start;
+  background-color: #333;
+  color: #f5f7fb;
+  font-size: 2rem;
+  border: none;
+  border-radius: 3px;
+  padding: 1rem 2rem;
+  cursor: pointer;
+}
+
+input,
 textarea {
   background: none;
-  border-radius: 3px;
-  padding: 1rem 0.75rem;
-  overflow: auto;
+  outline: 0;
+  border: 2px solid rgba(0, 0, 0, 0.4);
+  border-radius: 0.4rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
   width: 100%;
+  padding: 1.5rem 0.75rem;
+  margin-bottom: 0.5rem;
+  overflow: auto;
+}
+
+input:focus,
+textarea:focus {
+  border: 2px solid #0066ff;
+}
+
+textarea {
+  resize: none;
+  height: 200px;
+}
+
+label {
+  position: relative;
+}
+
+label p {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.error-message {
+  color: #eb5202;
+  font-size: 1.4rem;
+}
+
+@media (max-width: 500px) {
+  html {
+    font-size: 50%;
+  }
+  strong {
+    display: block;
+  }
 }
