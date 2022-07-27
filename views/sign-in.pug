@@ -5,7 +5,7 @@ block content
     p You are already logged in
   else 
     if authError
-      p= authError
+      p(style='color: red')= authError
     form.signin-form(action='/auth/signin' method='POST')
       label.form-control(for='email')
         p Email Address

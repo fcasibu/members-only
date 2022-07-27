@@ -1,14 +1,19 @@
 header.header
   div.header__logo
     a(href='/') Members Only
-  nav.primary: ul.primary__links
-    if currentUser
-      li.primary__link: a(href='/new-message') Create a new message   
-      if currentUser.role != 'member' && currentUser.role != 'admin'
-        li.primary__link: a(href='/join-club') Join the club
-      if currentUser.role != 'admin'
-        li.primary__link: a(href='/admin') Become an admin   
-      li.primary__link: a(href='/auth/signout') Sign out   
-    else
-      li.primary__link: a(href='/auth/signup') Sign Up   
-      li.primary__link: a(href='/auth/signin') Sign In
+  div.hamburger-menu 
+    span
+    span
+    span
+  nav.primary
+    ul.primary__links
+      if currentUser
+        li.primary__link: a(href='/new-message') Create a new message   
+        if currentUser.role != 'member' && currentUser.role != 'admin'
+          li.primary__link: a(href='/join-club') Join the club
+        if currentUser.role != 'admin'
+          li.primary__link: a(href='/admin') Become an admin   
+        li.primary__link: a(href='/auth/signout') Sign out   
+      else
+        li.primary__link: a(href='/auth/signin') Sign In
+        li.primary__link: a(href='/auth/signup') Sign Up   

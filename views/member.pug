@@ -8,7 +8,8 @@ block content
       p You are already a member of the club or an admin
     else
       if error
-        p= error.message
+        p(style='color: red')= error.message
+      h3 A mentality that every learners must have (1 word)
       form.message-form(action='' method='POST')
         label.form-control(for='answer')
           p Answer

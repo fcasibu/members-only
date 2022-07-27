@@ -27,7 +27,7 @@ exports.postMessageForm = catchAsync(async (req, res, next) => {
     message: req.body.message
   });
 
-  req.flash('info', `Successfully posted ${req.body.title}`);
+  req.flash('info', `Successfully posted the message`);
   res.redirect('/');
 });
 
