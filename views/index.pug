@@ -3,6 +3,18 @@ extends layout
 block content
   if info
     p.info-box= info
+  div.page-controls
+    div.left-arrow
+      if page > 1
+        a(href=`?page=${page - 1}`) &larr;
+    div.current-page
+      if page > 1
+        p= page
+      else
+        p 1
+    div.right-arrow
+      unless messages.length < 10
+        a(href=`?page=${page + 1}`) &rarr;
   div.messages
     each message in messages
       div.message
@@ -10,8 +22,6 @@ block content
           div.message__delete
             a(href=`${message._id}/delete`) Delete
         div.message__left
-          div.image-container
-            img(src=message.user.photoURL)
           div.role
             span= message.user.role
         div.message__right
@@ -28,6 +38,18 @@ block content
               span= message.relativeTime
             div.message__date
               p= message.formattedDate
+  div.page-controls
+    div.left-arrow
+      if page > 1
+        a(href=`?page=${page - 1}`) &larr;
+    div.current-page
+      if page > 1
+        p= page
+      else
+        p 1
+    div.right-arrow
+      unless messages.length < 10
+        a(href=`?page=${page + 1}`) &rarr;
 
 
 
