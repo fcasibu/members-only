@@ -27,11 +27,11 @@ block content
           div.message__author
             p Posted #{message.relativeTime} by  
               if currentUser && currentUser.role !== 'guest'
-                strong #{message.user.firstName} #{message.user.lastName}
+                strong #{message.user.fullName}
+                  span(data-role=message.user.role).role= message.user.role
               else
                 strong Unknown
-            div(data-role=message.user.role).role
-              span= message.user.role
+                  span(data-role=message.user.role).role= message.user.role
           div.message__date
             p= message.formattedDate
     else

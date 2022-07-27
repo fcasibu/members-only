@@ -43,6 +43,10 @@ const UserSchema = new mongoose.Schema({
   }
 });
 
+UserSchema.virtual('fullName').get(function () {
+  return `${this.firstName} ${this.lastName}`;
+});
+
 UserSchema.pre('save', async function (next) {
   this.password = await bcrypt.hash(this.password, 10);
 
